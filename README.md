@@ -31,16 +31,18 @@ npm run preview -- --port 5174 --strictPort
 - Jardín Europa: «Vista frontal» y «En perspectiva».
 - Entrada animada al cotizador y respeto de la preferencia de movimiento reducido.
 - Consulta de nueve pasos, resumen editable, recuperación del borrador local y confirmación antes de reiniciar.
+- Fotografías de Leonardo según la obra y el servicio disponible; desde Escala, las respuestas añaden objetos sobre una mesa interactiva. Tocar un objeto permite editar su respuesta.
 - Validación básica de teléfono, copia y descarga del resumen, y enlace para compartirlo por WhatsApp.
 
 ## Estructura
 
 - `src/main.jsx`: formulario, guía visual y estructura principal.
 - `src/PortfolioIntro.jsx`: portada, catálogo y comparación de proyectos.
+- `src/LeonardoDesk.jsx`, `src/leonardo-scenes.js` y `src/leonardo-desk.css`: escenas estáticas, correspondencias de recursos y mesa acumulativa.
 - `src/styles.css` y `src/portfolio.css`: estilos y adaptación a distintos tamaños.
 - `public/assets/brand/`: logo vectorial.
 - `public/assets/projects/`: fotografías optimizadas en WebP.
-- `public/assets/`: recursos visuales y clips de Leonardo.
+- `public/assets/leonardo/`: nuevas escenas y maquetas optimizadas; su README documenta los archivos recibidos, los nombres cruzados y cómo añadir próximos gadgets.
 - `scripts/validate-demo.mjs`: comprobaciones de compilación y recursos.
 
 Los nombres físicos de algunas fotos conservan los sufijos originales `antes` y `despues`; el orden y las etiquetas que ve el visitante se definen en `showcaseProjects`, dentro de `src/PortfolioIntro.jsx`.
@@ -49,7 +51,7 @@ Los nombres físicos de algunas fotos conservan los sufijos originales `antes` y
 
 Configura el número oficial de WhatsApp en `companyWhatsAppNumber`, dentro de `src/main.jsx`. Mientras esté vacío, WhatsApp permite elegir el destinatario.
 
-Las respuestas se guardan en el navegador del visitante. Los archivos seleccionados no se suben: solo se conservan sus nombres y deben adjuntarse al compartir la consulta. La demo no dispone de recepción en servidor, correo ni CRM. Leonardo es un asistente virtual y sus clips son referenciales.
+Las respuestas se guardan en el navegador del visitante. Los archivos seleccionados no se suben: solo se conservan sus nombres y deben adjuntarse al compartir la consulta. La demo no dispone de recepción en servidor, correo ni CRM. Leonardo es un asistente virtual representado mediante imágenes estáticas.
 
 ## Publicación
 

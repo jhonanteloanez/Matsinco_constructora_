@@ -36,8 +36,10 @@ import Sparkles from "lucide-react/dist/esm/icons/sparkles.js";
 import Warehouse from "lucide-react/dist/esm/icons/warehouse.js";
 import Wrench from "lucide-react/dist/esm/icons/wrench.js";
 import PortfolioIntro from "./PortfolioIntro.jsx";
+import LeonardoDesk, { ScaleChoiceVisual } from "./LeonardoDesk.jsx";
 import "./styles.css";
 import "./portfolio.css";
+import "./leonardo-desk.css";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -247,155 +249,11 @@ const detailAvatarModes = {
   contacto: "hold",
 };
 
-const avatarClips = {
-  idle: {
-    src: "/assets/leonardo-welcome.mp4",
-    label: "Bienvenida",
-    loop: true,
-  },
-  welcome: {
-    src: "/assets/leonardo-welcome.mp4",
-    label: "Presentación",
-    loop: true,
-  },
-  thinking: {
-    src: "/assets/leonardo-thinking.mp4",
-    label: "Analizando",
-    loop: true,
-  },
-  alert: {
-    src: "/assets/leonardo-alert.mp4",
-    label: "Alerta técnica",
-    loop: true,
-  },
-  inspect: {
-    src: "/assets/leonardo-inspect.mp4",
-    label: "Inspección",
-    loop: true,
-  },
-  hold: {
-    src: "/assets/leonardo-welcome.mp4",
-    label: "En espera",
-    loop: false,
-  },
-  complete: {
-    src: "/assets/leonardo-complete.mp4",
-    label: "Cierre",
-    loop: false,
-  },
-  viviendaAction: {
-    src: "/assets/leonardo-vivienda-action.mp4",
-    fallback: "/assets/leonardo-welcome.mp4",
-    label: "Vivienda",
-    loop: false,
-  },
-  viviendaHold: {
-    src: "/assets/leonardo-vivienda-hold.mp4",
-    fallback: "/assets/leonardo-welcome.mp4",
-    label: "Vivienda activa",
-    loop: false,
-  },
-  edificioAction: {
-    src: "/assets/leonardo-edificio-action.mp4",
-    fallback: "/assets/leonardo-thinking.mp4",
-    label: "Edificio",
-    loop: false,
-  },
-  edificioHold: {
-    src: "/assets/leonardo-edificio-hold.mp4",
-    fallback: "/assets/leonardo-thinking.mp4",
-    label: "Edificio activo",
-    loop: false,
-  },
-  industrialAction: {
-    src: "/assets/leonardo-industrial-action.mp4",
-    fallback: "/assets/leonardo-alert.mp4",
-    label: "Industrial",
-    loop: false,
-  },
-  industrialHold: {
-    src: "/assets/leonardo-industrial-hold.mp4",
-    fallback: "/assets/leonardo-alert.mp4",
-    label: "Industrial activo",
-    loop: false,
-  },
-  remodelacionAction: {
-    src: "/assets/leonardo-remodelacion-action.mp4",
-    fallback: "/assets/leonardo-inspect.mp4",
-    label: "Remodelación",
-    loop: false,
-  },
-  remodelacionHold: {
-    src: "/assets/leonardo-remodelacion-hold.mp4",
-    fallback: "/assets/leonardo-inspect.mp4",
-    label: "Remodelación activa",
-    loop: false,
-  },
-};
-
 const projectHoldAvatars = {
   vivienda: "viviendaHold",
   edificio: "edificioHold",
   industrial: "industrialHold",
   remodelacion: "remodelacionHold",
-};
-
-const detailIconMap = {
-  tamano: {
-    label: "Escala",
-    Icon: Ruler,
-    side: "size",
-    options: {
-      "Hasta 150 m²": { level: 1, label: "Compacto" },
-      "150 a 400 m²": { level: 2, label: "Medio" },
-      "Más de 400 m²": { level: 3, label: "Grande" },
-      "Aún no definido": { level: 0, label: "Por definir", Icon: CircleHelp },
-    },
-  },
-  estado: {
-    label: "Estado",
-    Icon: LandPlot,
-    options: {
-      "Solo idea": { Icon: CircleHelp, label: "Idea" },
-      "Tengo terreno": { Icon: LandPlot, label: "Terreno" },
-      "Tengo planos": { Icon: DraftingCompass, label: "Planos" },
-      "Obra iniciada": { Icon: Warehouse, label: "En obra" },
-    },
-  },
-  documentacion: {
-    label: "Docs",
-    Icon: FileText,
-    options: {
-      "Sin archivos": { Icon: CircleHelp, label: "Sin docs" },
-      Fotos: { Icon: Image, label: "Fotos" },
-      "Planos PDF/DWG": { Icon: FileText, label: "Planos" },
-      "Presupuesto previo": { Icon: ClipboardList, label: "Presupuesto" },
-    },
-  },
-  urgencia: {
-    label: "Tiempo",
-    Icon: CalendarClock,
-    options: {
-      "Este mes": { Icon: CalendarClock, label: "Urgente" },
-      "1 a 3 meses": { Icon: CalendarClock, label: "1-3 meses" },
-      "3 a 6 meses": { Icon: CalendarClock, label: "3-6 meses" },
-      "Sin apuro": { Icon: Clock, label: "Flexible" },
-    },
-  },
-  ubicacion: {
-    label: "Zona",
-    Icon: MapPin,
-  },
-  contacto: {
-    label: "Contacto",
-    Icon: Phone,
-    options: {
-      WhatsApp: { Icon: MessageCircle, label: "WhatsApp" },
-      Llamada: { Icon: Phone, label: "Llamada" },
-      "Visita técnica": { Icon: HardHat, label: "Visita" },
-      "Enviar formulario": { Icon: ClipboardList, label: "Formulario" },
-    },
-  },
 };
 
 const serviceHighlights = [
@@ -499,7 +357,7 @@ function DetailSegment({ step, value, focusIndex, onFocusIndex, onSelect, onPrev
     <div className="segment">
       <p>{step.label}</p>
       <span className="segment-cue">{step.cue}</span>
-      <div className="segment-grid">
+      <div className={`segment-grid ${step.id === "tamano" ? "scale-options" : ""}`}>
         {step.options.map((option) => (
           <button
             key={option}
@@ -513,7 +371,7 @@ function DetailSegment({ step, value, focusIndex, onFocusIndex, onSelect, onPrev
             onMouseLeave={onPreviewEnd}
             onClick={() => onSelect(step.id, option)}
           >
-            {option}
+            {step.id === "tamano" ? <><ScaleChoiceVisual value={option} /><span className="scale-option-label">{option}</span></> : option}
           </button>
         ))}
       </div>
@@ -625,73 +483,6 @@ function BriefPreview({ project, phase, details, onEdit }) {
   );
 }
 
-function getDetailVisual(stepId, value) {
-  const config = detailIconMap[stepId];
-  const option = config?.options?.[value];
-  return {
-    Icon: option?.Icon || config?.Icon || CircleHelp,
-    label: option?.label || value || config?.label || "Pendiente",
-    level: option?.level,
-  };
-}
-
-function SizeMeter({ value }) {
-  const visual = getDetailVisual("tamano", value);
-  const Icon = visual.Icon;
-  const bricks = visual.level ? Array.from({ length: visual.level }) : [];
-  return (
-    <div className="hud-size" aria-label={`Escala: ${visual.label}`}>
-      <span>
-        {bricks.length ? (
-          bricks.map((_, index) => <BrickWall key={index} size={18 + index * 2} strokeWidth={2.3} />)
-        ) : (
-          <Icon size={24} strokeWidth={2.4} />
-        )}
-      </span>
-      <small>{visual.label}</small>
-    </div>
-  );
-}
-
-function AvatarHud({ project, phase, details, preview, ready }) {
-  const detailPreview = preview?.type === "detail" && preview.option ? { [preview.id]: preview.option } : {};
-  const hudDetails = { ...details, ...detailPreview };
-  const projectItem = preview?.type === "project" ? preview : project;
-  const phaseItem = preview?.type === "phase" ? preview : phase;
-  const ProjectIcon = projectItem?.icon || HardHat;
-  const PhaseIcon = phaseItem?.icon || Layers;
-  const detailChips = detailSteps
-    .filter((step) => step.id !== "tamano" && hudDetails[step.id])
-    .map((step) => ({ step, ...getDetailVisual(step.id, hudDetails[step.id]) }));
-
-  return (
-    <div className="avatar-hud" aria-label="Indicadores visuales de la cotización">
-      {projectItem && (
-        <div className="hud-project">
-          <ProjectIcon size={24} strokeWidth={2.25} />
-        </div>
-      )}
-      {phaseItem && (
-        <div className="hud-phase">
-          <PhaseIcon size={24} strokeWidth={2.25} />
-          <small>{phaseItem.title}</small>
-        </div>
-      )}
-      {(hudDetails.tamano || ready) && <SizeMeter value={hudDetails.tamano} />}
-      {detailChips.length > 0 && (
-        <div className="hud-stack">
-          {detailChips.map(({ step, Icon, label }) => (
-            <span key={step.id}>
-              <Icon size={18} strokeWidth={2.2} />
-              <small>{label}</small>
-            </span>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
 function App() {
   const rootRef = useRef(null);
   const initialStage = useRef(true);
@@ -711,7 +502,6 @@ function App() {
   const [focusIndex, setFocusIndex] = useState(0);
   const [preview, setPreview] = useState(null);
   const [demoMode, setDemoMode] = useState(false);
-  const [avatarReady, setAvatarReady] = useState(false);
   const activeProject = projectTypes.find((item) => item.id === project?.id);
   const activePhase = phases.find((item) => item.id === phase?.id);
   const currentDetail = detailSteps[stage - 2];
@@ -719,10 +509,6 @@ function App() {
   const completedCount = (project ? 1 : 0) + (phase ? 1 : 0) + Object.keys(details).length + (leadReady ? 1 : 0);
   const ready = completedCount === detailSteps.length + 3 && stage === stageNames.length - 1;
   const stageTitle = ready ? "Revisa tu consulta" : stage === 0 ? "¿Qué quieres construir?" : stage === 1 ? "¿En qué te ayudamos?" : currentDetail?.label || "¿Cómo te contactamos?";
-  const projectHoldMode = projectHoldAvatars[activeProject?.id] || "welcome";
-  const previewMode = preview?.type === "project" ? preview.avatar : null;
-  const resolvedAvatarMode = ready ? "complete" : previewMode || (activeProject ? projectHoldMode : avatarMode);
-  const avatarClip = avatarClips[resolvedAvatarMode] || avatarClips.idle;
   const quoteProfile = useMemo(() => getQuoteProfile(activeProject, activePhase, details), [activePhase, activeProject, details]);
   const briefText = useMemo(() => {
     return [
@@ -799,12 +585,6 @@ function App() {
     if (window.innerWidth < 900) rootRef.current?.querySelector("#flujo")?.scrollIntoView({ block: "start", behavior: "instant" });
   }, [stage, ready]);
 
-  useEffect(() => {
-    const video = rootRef.current?.querySelector("video");
-    if (!video) return;
-    if (motionPaused || !quoteEntered) video.pause();
-    else video.play().catch(() => {});
-  }, [motionPaused, avatarClip.src, quoteEntered]);
 
   useEffect(() => {
     const payload = {
@@ -875,8 +655,9 @@ function App() {
         { opacity: 0, y: 8, scale: 0.98 },
         { opacity: 1, y: 0, scale: 1, duration: 0.32, ease: "back.out(1.4)" }
       );
-      gsap.fromTo(
-        ".choice, .segment-grid button, .summary",
+      const choices = rootRef.current?.querySelectorAll(".choice, .segment-grid button, .summary");
+      if (choices?.length) gsap.fromTo(
+        choices,
         { opacity: 0, x: 18 },
         { opacity: 1, x: 0, duration: 0.28, ease: "power2.out", stagger: 0.035 }
       );
@@ -884,24 +665,10 @@ function App() {
     { dependencies: [stage, project?.id, phase?.id, Object.keys(details).length], scope: rootRef }
   );
 
-  useGSAP(
-    () => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      gsap.fromTo(
-        ".avatar-video",
-        { opacity: 0, scale: 0.985, filter: "blur(3px) saturate(1.2)" },
-        { opacity: 1, scale: 1, filter: "blur(0px) saturate(1)", duration: 0.42, ease: "power2.out" }
-      );
-      gsap.fromTo(
-        ".avatar-hud",
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.28, ease: "power2.out", delay: 0.08 }
-      );
-    },
-    { dependencies: [avatarClip.src, activeProject?.id, activePhase?.id, Object.keys(details).join("|")], scope: rootRef }
-  );
 
   const setDetail = (key, value) => {
+    setLeadConfirmed(false);
+    setDemoMode(false);
     setDetails((current) => ({ ...current, [key]: value }));
     setAvatarMode(projectHoldAvatars[activeProject?.id] || detailAvatarModes[key] || "thinking");
     setPreview(null);
@@ -975,34 +742,19 @@ function App() {
           <p className="local-note"><ShieldCheck size={14} /> Tus respuestas se guardan en este navegador. Podrás retomarlas al volver.</p>
         </div>
 
-        <div className={`avatar-stage mode-${resolvedAvatarMode}`}>
-          {!avatarReady && <div className="avatar-loading">Preparando a Leonardo</div>}
-<div className="scene-label"><span /> Leonardo · Tu guía de proyecto</div>
-          <video
-            key={avatarClip.src}
-            className="avatar-video"
-            src={quoteEntered ? avatarClip.src : undefined}
-            poster="/assets/projects/residencia-antes.webp"
-            autoPlay={!motionPaused && quoteEntered}
-            muted
-            loop={avatarClip.loop !== false}
-            playsInline
-            preload="metadata"
-            onCanPlay={(event) => { setAvatarReady(true); if (motionPaused) event.currentTarget.pause(); }}
-            onError={(event) => {
-              const fallbackUrl = avatarClip.fallback ? new URL(avatarClip.fallback, window.location.href).href : "";
-              if (fallbackUrl && event.currentTarget.src !== fallbackUrl) {
-                event.currentTarget.src = avatarClip.fallback;
-              }
-            }}
-            aria-label="Leonardo, asistente virtual de Matsinco"
-          />
-          <button type="button" className="motion-toggle" onClick={() => setMotionPaused((value) => !value)} aria-pressed={motionPaused}>{motionPaused ? "Activar animación" : "Pausar animación"}</button>
-          <div className="speech">
-            <strong>Una guía para cada decisión</strong>
-            <span>{dialogue}</span>
-          </div>
-        </div>
+        <LeonardoDesk
+          project={demoMode && preview?.type === "project" ? preview : activeProject}
+          phase={demoMode && preview?.type === "phase" ? preview : activePhase}
+          details={details}
+          steps={detailSteps}
+          stage={stage}
+          ready={ready}
+          dialogue={dialogue}
+          active={quoteEntered}
+          paused={motionPaused}
+          onToggleMotion={() => setMotionPaused((value) => !value)}
+          onEdit={goToStage}
+        />
 
         <aside id="flujo" className="game-shell" aria-labelledby="question-title" onKeyDown={handleChoiceKeys}>
           <div className="panel-head">

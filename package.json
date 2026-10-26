@@ -7,7 +7,7 @@
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "validate": "npm run build && node scripts/validate-demo.mjs"
+    "validate": "npm run build && node scripts/validate-demo.mjs && node --test scripts/leonardo-scenes.test.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

@@ -5,11 +5,10 @@ const root = process.cwd();
 
 const requiredFiles = [
   "public/assets/casa-fondo-limpio.png",
-  "public/assets/leonardo-welcome.mp4",
-  "public/assets/leonardo-thinking.mp4",
-  "public/assets/leonardo-alert.mp4",
-  "public/assets/leonardo-inspect.mp4",
-  "public/assets/leonardo-complete.mp4",
+  "public/assets/leonardo/vivienda.webp",
+  "public/assets/leonardo/edificio.webp",
+  "public/assets/leonardo/industrial.webp",
+  "public/assets/leonardo/remodelacion.webp",
   "public/matsinco-favicon.svg",
   "src/main.jsx",
   "src/styles.css",
@@ -18,7 +17,7 @@ const requiredFiles = [
 
 const requiredSourceMarkers = [
   "const companyWhatsAppNumber",
-  "const avatarClips",
+  "<LeonardoDesk",
   "const demoPreviewItems",
   "localStorage.setItem(storageKey",
   "Archivos de referencia",
